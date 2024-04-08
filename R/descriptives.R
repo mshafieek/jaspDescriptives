@@ -51,6 +51,7 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     dataset <- dataset[non_na_rows, ]
     dataset.factors <- dataset.factors[non_na_rows, ]
 
+
     # calculate the number of missing values in any of the split variables
     numberMissingSplitBy <- sum(apply(dataset[, splitNames, drop = FALSE], 1, anyNA))
 
@@ -60,6 +61,7 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     # create a list of datasets, one for each combination of levels
     splitDat.factors <- split(dataset.factors[variables], splitFactors)
   }
+
 
 
   .descriptivesDescriptivesTable(dataset, options, jaspResults, numberMissingSplitBy = numberMissingSplitBy)
@@ -93,7 +95,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       jaspResults[["tables"]]$dependOn(c("frequencyTables", "splitBy", "frequencyTablesMaximumDistinctValues"))
       jaspResults[["tables"]]$position <- 3
     }
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     .descriptivesFrequencyTables(dataset.factors, options, jaspResults[["tables"]], splitNames = splitNames)
   }
 
@@ -115,6 +121,7 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       jaspResults[["matrixPlot"]]$position <- 6
     }
   }
+
 
 
   # Distribution plots
@@ -143,6 +150,7 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
   }
 
 
+
   # Box plots
   if (options$boxPlot) {
     if (is.null(jaspResults[["boxPlot"]])) {
@@ -167,6 +175,8 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
 
 
+
+
   # QQ plots
   if (options$qqPlot) {
     if (is.null(jaspResults[["QQPlots"]])) {
@@ -180,14 +190,22 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       jaspResults[["QQPlots"]]$position <- 8
     }
     QQPlots <- jaspResults[["QQPlots"]]
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     if (makeSplit) {
       qqSplitFactors <- lapply(splitNames, function(splitName) dataset[[splitName]])
       qqSplitLevels <- lapply(qqSplitFactors, levels)
       non_na_rows <- complete.cases(dataset[, c(variables, splitNames)])
       dataset <- dataset[non_na_rows, ]
       qqSplitFactors <- lapply(qqSplitFactors, na.omit)
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
       for (var in variables) {
         if (!is.null(QQPlots[[var]]) || !.descriptivesIsNumericColumn(dataset.factors, var))
           next
@@ -195,7 +213,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
         deeperQQPlots <- createJaspContainer(paste0(var))
         deeperQQPlots$dependOn(optionContainsValue = list(variables = var))
         QQPlots[[var]] <- deeperQQPlots
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
         for (lev in seq_along(qqSplitLevels)) {
           QQPlots[[var]][[paste0(var, lev)]] <- .descriptivesQQPlot(dataset = qqSplitFactors[[lev]], options = options, qqvar = var, levelName = qqSplitLevels[[lev]])
         }
@@ -211,6 +233,8 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
 
 
+
+
   # Pie charts
   if (options$pieChart) {
     if (is.null(jaspResults[["pieCharts"]])) {
@@ -221,7 +245,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
     piePlots <- jaspResults[["pieCharts"]]
     jaspGraphs::setGraphOption("palette", options[["colorPalette"]])
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     for (var in variables) {
       # skip non-categorical variables
       if (is.double(dataset.factors[[var]]))
@@ -236,6 +264,8 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       }
     }
   }
+
+
 
 
 
@@ -273,6 +303,8 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
 
 
+
+
   # Scatter plots
   if (options[["scatterPlot"]]) {
     if (is.null(jaspResults[["scatterPlots"]])) {
@@ -284,7 +316,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       ))
       jaspResults[["scatterPlots"]]$position <- 10
     }
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     if (makeSplit) {
       scatterPlots <- jaspResults[["scatterPlots"]]
       for (splitVar in splitNames) {
@@ -298,6 +334,8 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
 
 
+
+
   # Interval plots
   if (options$intervalPlot) {
     if (is.null(jaspResults[["IntervalPlots"]])) {
@@ -307,7 +345,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     }
 
     intervalPlots <- jaspResults[["IntervalPlots"]]
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     if (makeSplit) {
       for (splitVar in splitNames) {
         splitDatVar <- splitDat.factors[[splitVar]]
@@ -330,6 +372,8 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
 
 
+
+
   # Dot plots
   if (options[["dotPlot"]]) {
     if (is.null(jaspResults[["DotPlots"]])) {
@@ -339,7 +383,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     }
 
     dotPlots <- jaspResults[["DotPlots"]]
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     if (makeSplit) {
       for (splitVar in splitNames) {
         splitDatVar <- splitDat.factors[[splitVar]]
@@ -368,6 +416,8 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
 
 
+
+
   # Heatmap
   if (options[["heatmapHorizontalAxis"]] != "" && options[["heatmapVerticalAxis"]] != "") {
     if (is.null(jaspResults[["heatmaps"]])) {
@@ -380,9 +430,15 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       ))
       jaspResults[["heatmaps"]]$position <- 14
     }
+<<<<<<< HEAD
 
     heatmaps <- jaspResults[["heatmaps"]]
 
+=======
+
+    heatmaps <- jaspResults[["heatmaps"]]
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     if (makeSplit) {
       for (splitVar in splitNames) {
         splitDatVar <- splitDat.factors[[splitVar]]
@@ -395,6 +451,8 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
 
 
+
+
   # Pareto plots
   if (options[["paretoPlot"]]) {
     if (is.null(jaspResults[["paretoPlots"]])) {
@@ -404,7 +462,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     }
 
     parPlots <- jaspResults[["paretoPlots"]]
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     if (makeSplit) {
       for (splitVar in splitNames) {
         splitDatVar <- splitDat.factors[[splitVar]]
@@ -414,9 +476,15 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       .descriptivesParetoPlots(dataset.factors, variables, options)
     }
   }
+<<<<<<< HEAD
 
 
 
+=======
+
+
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   # Density plots
   if (options[["densityPlot"]]) {
     if (is.null(jaspResults[["densityPlot"]])) {
@@ -427,9 +495,15 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       ))
       jaspResults[["densityPlot"]]$position <- 17
     }
+<<<<<<< HEAD
 
     densityPlotContainer <- jaspResults[["densityPlot"]]
 
+=======
+
+    densityPlotContainer <- jaspResults[["densityPlot"]]
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     if (makeSplit) {
       for (splitVar in splitNames) {
         splitDatVar <- splitDat.factors[[splitVar]]
@@ -439,9 +513,15 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       .descriptivesDensityPlots(densityPlotContainer, dataset.factors, variables, options)
     }
   }
+<<<<<<< HEAD
 
 
 
+=======
+
+
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   # Likert plots
   if (options[["likertPlot"]] && !all(lapply(dataset.factors[variables], is.double))) {
     if (is.null(jaspResults[["likertPlot"]])) {
@@ -452,9 +532,15 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       ))
       jaspResults[["likertPlot"]]$position <- 16
     }
+<<<<<<< HEAD
 
     likPlotsContainer <- jaspResults[["likertPlot"]]
 
+=======
+
+    likPlotsContainer <- jaspResults[["likertPlot"]]
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     if (makeSplit) {
       for (splitVar in splitNames) {
         splitDatVar <- splitDat.factors[[splitVar]]
@@ -470,8 +556,13 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       likPlotsContainer <- .descriptivesLikertPlots(dataset.factors, gettext("Likert Plots"), options)
     }
   }
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   return()
 }
 
@@ -493,7 +584,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
   if (numberMissingSplitBy)
     stats$addFootnote(message = gettextf("Excluded %1$i rows from the analysis that correspond to the missing values of the split-by variable %2$s", numberMissingSplitBy, paste(options$splitBy, collapse = ", ")))
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   stats$dependOn(c(
     "splitBy", "variables", "quantilesForEqualGroupsNumber", "percentileValues", "mode", "median", "mean",
     "seMean", "sd", "coefficientOfVariation", "variance", "skewness", "kurtosis", "shapiroWilkTest",
@@ -504,6 +599,8 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
 
 
+
+
   if (wantsSplit) {
     stats$transposeWithOvertitle <- TRUE
     stats$addColumnInfo(name = "Variable", title = "", type = "string")
@@ -511,12 +608,21 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
   } else {
     stats$addColumnInfo(name = "Variable", title = "", type = "string")
   }
+<<<<<<< HEAD
 
   formattedMeanCiPercent <- format(100 * options$meanCiLevel, digits = 3, drop0trailing = TRUE)
   formattedSdCiPercent <- format(100 * options$sdCiLevel, digits = 3, drop0trailing = TRUE)
   formattedVarianceCiPercent <- format(100 * options$varianceCiLevel, digits = 3, drop0trailing = TRUE)
 
 
+=======
+
+  formattedMeanCiPercent <- format(100 * options$meanCiLevel, digits = 3, drop0trailing = TRUE)
+  formattedSdCiPercent <- format(100 * options$sdCiLevel, digits = 3, drop0trailing = TRUE)
+  formattedVarianceCiPercent <- format(100 * options$varianceCiLevel, digits = 3, drop0trailing = TRUE)
+
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   # only add overtitle for CIs if table is transposed, else describe CIs in title
   if (options[["descriptivesTableTransposed"]]) {
     meanCiOvertitle <- gettextf("%s%% Confidence Interval Mean", formattedMeanCiPercent)
@@ -606,17 +712,36 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     # split <- dataset[[options$splitBy]]
     # splitLevels <- levels(split)
     # nLevels <- length(levels(split))
+<<<<<<< HEAD
 
 
     splitLevels <- expand.grid(lapply(options$splitBy, function(splitVar) levels(dataset[[splitVar]])))
     nLevels <- nrow(splitLevels)
 
 
+=======
+
+
+    splitLevels <- expand.grid(lapply(options$splitBy, function(splitVar) levels(dataset[[splitVar]])))
+    nLevels <- nrow(splitLevels)
+
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
 
     for (variable in variables) {
       for (l in seq_len(nLevels)) {
         # column <- dataset[[variable]][split == splitLevels[l]]
         # subReturn <- .descriptivesDescriptivesTable_subFunction(column, list(Variable = variable, Level = splitLevels[l]), options, shouldAddNominalTextFootnote, shouldAddModeMoreThanOnceFootnote, shouldAddModeContinuousTreatedAsDiscreteFootnote, jaspResults)
+<<<<<<< HEAD
+
+        condition <- Reduce(`&`, lapply(seq_along(options$splitBy), function(splitIdx) dataset[[options$splitBy[splitIdx]]] == splitLevels[l, splitIdx]))
+
+        column <- dataset[[variable]][condition]
+        subReturn <- .descriptivesDescriptivesTable_subFunction(column, list(Variable = variable, Level = paste0(splitLevels[l, ], collapse = "_")), options, shouldAddNominalTextFootnote, shouldAddModeMoreThanOnceFootnote, shouldAddModeContinuousTreatedAsDiscreteFootnote, jaspResults)
+
+
+=======
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
 
         condition <- Reduce(`&`, lapply(seq_along(options$splitBy), function(splitIdx) dataset[[options$splitBy[splitIdx]]] == splitLevels[l, splitIdx]))
 
@@ -767,9 +892,15 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     resultsCol[["VarianceCILB"]] <- varianceCiResults$lower
   }
 
+<<<<<<< HEAD
 
 
 
+=======
+
+
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   # should explain supremum and infimum of an empty set?
   shouldAddExplainEmptySet <- (options$minimum || options$maximum) && valid == 0
 
@@ -815,8 +946,13 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     resultsCol[["q3"]] <- NULL
   }
 
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   equalGroupNames <- NULL
 
   if (options$quantilesForEqualGroups)
@@ -1136,17 +1272,29 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 .plotMarginalCorDescriptives <- function(variable, xName = NULL, yName = gettext("Density"), splitVariables = NULL) {
   variable <- na.omit(variable)
   isNumeric <- !(is.factor(variable) || (is.integer(variable) && length(unique(variable)) <= 10))
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   p <- ggplot2::ggplot(data = data.frame(x = variable))
   hdiff <- NULL
   xBreaks <- NULL
   yBreaks <- NULL
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   if (!is.null(splitVariables)) {
     # Handle multiple split variables
     p <- p + ggplot2::facet_grid(. ~ paste(...), scales = "free")
   }
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   if (isNumeric) {
     h <- hist(variable, plot = FALSE)
     hdiff <- h$breaks[2L] - h$breaks[1L]
@@ -1252,13 +1400,21 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
   if (!isNumericY)
     d$y <- as.factor(d$y)
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   if (!is.null(splitVariables)) {
     for (splitVar in splitVariables) {
       d[[splitVar]] <- factor(d[[splitVar]])
     }
   }
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   if (is.null(xBreaks))
     xBreaks <- jaspGraphs::getPrettyAxisBreaks(d$x)
 
@@ -1281,11 +1437,19 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
   p <- ggplot2::ggplot(data = d, ggplot2::aes(x = x, y = y)) +
     jaspGraphs::geom_point()
+<<<<<<< HEAD
 
   if (!is.null(splitVariables)) {
     p <- p + ggplot2::facet_grid(. ~ ., scales = "free", space = "free", drop = TRUE, margins = FALSE)
   }
 
+=======
+
+  if (!is.null(splitVariables)) {
+    p <- p + ggplot2::facet_grid(. ~ ., scales = "free", space = "free", drop = TRUE, margins = FALSE)
+  }
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   if (bothNumeric) {
     xr <- range(xBreaks)
     dfLine <- data.frame(x = xr, y = rangeLineObj)
@@ -1297,7 +1461,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
   } else {
     p <- p + ggplot2::scale_x_discrete(name = xName)
   }
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   if (isNumericY) {
     p <- p + ggplot2::scale_y_continuous(name = yName, breaks = yBreaks, limits = range(yBreaks))
   } else {
@@ -1314,13 +1482,18 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     x = 0, y = 1,
     label = paste(strwrap(errorMessage, width = 40, prefix = "\n", initial = ""), collapse = "")
   )
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   if (!is.null(splitVariables)) {
     df <- expand.grid(df, stringsAsFactors = FALSE)
     for (splitVar in splitVariables) {
       df[[splitVar]] <- NA
     }
   }
+<<<<<<< HEAD
 
   p <- ggplot2::ggplot(data = df, ggplot2::aes(x = x, y = y, label = label)) +
     ggplot2::geom_text(size = .4 * jaspGraphs::getGraphOption("fontsize"))
@@ -1329,6 +1502,16 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
     p <- p + ggplot2::facet_grid(. ~ ., scales = "free", space = "free", drop = TRUE, margins = FALSE)
   }
 
+=======
+
+  p <- ggplot2::ggplot(data = df, ggplot2::aes(x = x, y = y, label = label)) +
+    ggplot2::geom_text(size = .4 * jaspGraphs::getGraphOption("fontsize"))
+
+  if (!is.null(splitVariables)) {
+    p <- p + ggplot2::facet_grid(. ~ ., scales = "free", space = "free", drop = TRUE, margins = FALSE)
+  }
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
   p <- p + jaspGraphs::getEmptyTheme()
   return(p)
 }
@@ -1338,21 +1521,36 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
   if (!is.null(splitVariables)) {
     # return a collection
     split <- expand.grid(splitVariables, stringsAsFactors = FALSE)
+<<<<<<< HEAD
 
     plotResult <- createJaspContainer(title = variables)
     plotResult$dependOn(options = c("splitBy", "variables"), optionContainsValue = list(variables = variables, splitBy = splitVariables))
 
+=======
+
+    plotResult <- createJaspContainer(title = variables)
+    plotResult$dependOn(options = c("splitBy", "variables"), optionContainsValue = list(variables = variables, splitBy = splitVariables))
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     for (i in seq_len(nrow(split))) {
       subsetDataset <- dataset
       for (j in seq_len(ncol(split))) {
         subsetDataset <- subsetDataset[subsetDataset[[splitVariables[j]]] == split[i, j], ]
       }
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
       title <- paste(variables, collapse = ", ")
       for (j in seq_len(ncol(split))) {
         title <- paste(title, split[i, j], sep = " - ")
       }
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
       plotResult[[paste0("Plot", i + 1)]] <- .descriptivesFrequencyPlots_SubFunc(
         dataset = subsetDataset,
         variables = variables,
@@ -1383,7 +1581,11 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
       numberOfBins = options$distributionAndCorrelationPlotHistogramManualNumberOfBins
     )
     aPlot$dependOn(options = c("splitBy", "variables"), optionContainsValue = list(variables = variables))
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 301012f (changing the table. Now the table shows more than two split variables.)
     return(aPlot)
   }
 }
@@ -1485,20 +1687,20 @@ DescriptivesInternal <- function(jaspResults, dataset, options) {
 
     if (options[["boxPlotViolin"]]) {
       p <- p + ggplot2::geom_violin(trim = FALSE, size = 0.75, scale = "width", width = vioWidth)
-    } 
-    
+    }
+
     if (options[["boxPlotBoxPlot"]]) {
       # if we add jittered data points, don't show outlier dots
       outlierShape <- if (options[["boxPlotJitter"]]) NA else 19
       p <- p +
         ggplot2::stat_boxplot(geom = "errorbar", size = 0.75, width = boxWidth / 2) +
         ggplot2::geom_boxplot(size = 0.75, outlier.size = 2, width = boxWidth, outlier.shape = outlierShape)
-    } 
-    
+    }
+
     if (options[["boxPlotJitter"]]) {
       p <- p + ggplot2::geom_jitter(ggplot2::aes(fill = group, alpha = 0.5), size = 3, shape = 21, stroke = 1, position = ggplot2::position_jitter(width = 0.05, height = 0))
       if (options[["boxPlotColourPalette"]])
-        p <- p + jaspGraphs::scale_JASPfill_discrete(palette) 
+        p <- p + jaspGraphs::scale_JASPfill_discrete(palette)
       else
         p <- p + ggplot2::scale_fill_manual(values = rep("grey", nlevels(group)))
     }
