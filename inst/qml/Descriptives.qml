@@ -35,7 +35,7 @@ Form
 	{
 		AvailableVariablesList	{ name: "allVariablesList"								}
 		AssignedVariablesList	{ name: "variables";		title: qsTr("Variables")	}
-		AssignedVariablesList	{ name: "splitBy";			title: qsTr("Split");		singleVariable: true; suggestedColumns: ["ordinal", "nominal"];	id: splitBy }
+        AssignedVariablesList	{ name: "splitBy";			title: qsTr("Split");		singleVariable: false; suggestedColumns: ["ordinal", "nominal"];	id: splitBy }
 	}
 
 	CheckBox
@@ -50,7 +50,7 @@ Form
 		title: qsTr("Statistics")
 
 		Group
-		{
+        {
 			title: qsTr("Sample size")
 			CheckBox { name: "valid";			label: qsTr("Valid");	checked: true	}
 			CheckBox { name: "missing";			label: qsTr("Missing");	checked: true	}
